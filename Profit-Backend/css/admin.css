@@ -1,0 +1,127 @@
+
+
+body {
+    font-family: sans-serif;
+}
+
+
+/*=============================NavBar======================================*/
+.navbar{
+    text-transform: uppercase;
+    font-weight: 400;
+    font-size: .9rem;
+    letter-spacing: .1rem;
+    background: rgba(136, 9, 9, 0.4)!important;
+  }
+  .navbar-brand img {
+    height: 3.5rem;
+    padding-left: .5rem;
+    padding-top: .2rem;
+  }
+  .nav-link {
+    font-family: sans-serif;
+    float: right;
+  }
+  .navbar-dark .nav-link {
+    color: white;
+    padding-top: 1.5rem;
+    padding-right: 1.5rem;
+  }
+  .navbar-dark .nav-link.active,
+  .navbar-dark .nav-link:hover {
+    color: #e23e3e;
+  }
+/*=============================NavBar======================================*/
+
+.admin-wrapper {
+    display: flex;
+    height: calc(100% - 70px);
+}
+
+.admin-wrapper .left-sidebar {
+    flex: 2;
+    height: 500px;
+    background-color: #833737;
+}
+
+.admin-wrapper .left-sidebar ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    color: #771818;
+}
+.admin-wrapper .left-sidebar ul li a {
+    padding: 18px;
+    padding-left: 15px;
+    display: block;
+    border-bottom: 1px solid #771818;
+    color: #ccbebe;
+}
+.admin-wrapper .left-sidebar ul li a:hover {
+    background: #771818;
+}
+
+.admin-wrapper .admin-content {
+    flex: 8;
+    padding: 40px 100px 100px;
+    overflow-y: scroll;
+    padding-bottom: 200px;
+}
+
+.admin-content .page-title {
+    text-align: center;
+    margin-bottom: 1.4rem;
+    font-family: sans-serif;
+    color: brown;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 1.1rem;
+}
+
+th, td {
+    padding: 15px;
+    text-align: left;
+    border-bottom: 1px solid #979696;
+}
+
+.edit {
+    color: green;
+}
+.delete {
+    color: red;
+}
+.publish {
+    color: blue;
+}
+
+.edit:hover , .delete:hover , .publish:hover {
+    text-decoration: underline ;
+}
+
+form div {
+    margin-bottom: 15px;
+}
+
+.btn-big {
+  background-color: rgb(212, 120, 120);
+  border: none;
+  color: white;
+  padding: 9px 25px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 14px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 7px;
+}
+.text-input {
+    width: 400px;
+    height: 25px;
+}
+.content {
+    margin-top: -19px;
+}
