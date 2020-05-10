@@ -45,7 +45,7 @@
     //Errors Functions
 
     function Error_validation($Error){
-        return '<div class="alert alert-danger">'.$Error.' </div>';
+        return '<div class="alert alert-danger text-center">'.$Error.' </div>';
 
     }
 
@@ -88,11 +88,11 @@
                 }  
             }else{
                 if(user_registration($FirstName, $LastName, $Email, $Pass)){
-                    set_message('<p class="bg-success text-center lead"> You Have successfully Registered. <br> Please Check Your Activation Link.</p>');
+                    set_message('<p class="alert alert-success text-center"> You have successfully registered. Please check your email.</p>');
                     redirect("login.php");
                 }else{
-                    set_message('<p class="bg-danger text-center lead"> 
-                    Account Not Registered. Please Try Again. </p>');
+                    set_message('<p class="alert alert-danger text-center "> 
+                    Account not registered. Please try again. </p>');
                     redirect("register.php");
                 }
             }
@@ -124,13 +124,13 @@
             $Password =md5($Pass);
             $Validation_code= md5($FirstName+ microtime());
 
-            $sql="INSERT INTO user (FirstName, LastName, Email, Password,Validation_Code,Active) VALUES ('$FirstName','$LastName','$Email', '$Password', '$Validation_code','0')";
+            $sql="INSERT INTO user (FirstName, LastName, Email, Password,type,Validation_Code,Active) VALUES ('$FirstName','$LastName','$Email', '$Password','0', '$Validation_code','0')";
 
             $result= Query($sql);
             confirm($result);
 
             $subject="Activate Your Account.";
-            $msg= "Please Click The Link Below To Activate Your Account http://localhost/user/useraccount/activate.php?Email=$Email&Code=$Validation_code";
+            $msg= "Please click the link below to activate your account http://localhost/Profit-Backend/useraccount/activate.php?Email=$Email&Code=$Validation_code";
             $header="noreply@profit.com";
             
             send_email($Email, $subject, $msg ,$header);
@@ -152,11 +152,10 @@
                 $sqlquery= "UPDATE user SET Active='1', Validation_Code='0' WHERE Email='$Email' AND Validation_Code='$Code'";
                 $result2 = Query($sqlquery);
                 confirm($result2);
-                set_message('<p class="bg-success text-center lead"> You Have Successfully Registered. <p>');
+                set_message('<p class=" alert alert-success text-center lead"> You have successfully registered. <p>');
                 redirect('login.php');
             }else{
-                echo '<p class="bg-danger text-center lead"> Account Not Activated . </p>';
-
+                echo '<p class="alert alert-danger text-center lead"> Account not activated . </p>';
             }
         }
     }
@@ -170,20 +169,18 @@
             $Remember= isset($_POST['remember']);
 
             if(empty($UserEmail)){
-                $Errors[]="Please Enter Your Email.";
+                $Errors[]="Please enter your email.";
             }
             if(empty($UserPass)){
-                $Errors[]="Please Enter Your Password.";
+                $Errors[]="Please enter your password.";
             }
             if(!empty($Errors)){
                 foreach($Errors as $Error){
                     echo  Error_validation($Error);
                 }
             }else{
-                if(user_login($UserEmail,$UserPass,$Remember)){
-                    redirect('../saved-items.html');
-                }else{
-                    echo Error_validation("Please Enter The Correct Email or Password.");
+                if(!user_login($UserEmail,$UserPass,$Remember)){
+                    echo Error_validation("Please enter the correct email or password./Your account is not verified yet.");
 
                 }
             }
@@ -196,7 +193,7 @@
 
     //User Login Function
     function user_login($UEmail,$UPass,$Remember){
-        $query=" SELECT * FROM user WHERE Email='$UEmail' AND Active='1' ";
+        $query=" SELECT * FROM user WHERE Email='$UEmail' AND Active='1' AND type='0' ";
         $result= Query($query);
 
         if($row=fatech_data($result)){
@@ -209,6 +206,23 @@
                 return true;
             }else{
                 return false;
+            }
+        }else{
+            $query2=" SELECT * FROM user WHERE Email='$UEmail' AND Active='1' AND type='1' ";
+            $result2= Query($query2);
+
+            if($row=fatech_data($result2)){
+                $db_pass= $row['Password'];
+                if(md5($UPass)==$db_pass){
+                    if($Remember == true){
+                        setcookie('email', $UEmail, time()+86400);
+                    }
+                    redirect('../Admin/admin.php');
+                    $_SESSION['Email']=$UEmail;
+                    return true;
+                }else{
+                    return false;
+                }    
             }
         }
     }
@@ -238,12 +252,12 @@
 
                     $sql=" UPDATE user SET Validation_Code='$code' WHERE Email='$Email' ";
                     Query($sql);
-                    $Subject= "Please reset the password";
-                    $Message= "Please Follow the link to reset the password http://localhost/user/useraccount/code.php?Email='$Email'&Code='$code'";
+                    $Subject= "Please reset the password.";
+                    $Message= "Please click the link below to reset your password http://localhost/Profit-Backend/useraccount/code.php?Email='$Email'&Code='$code'";
                     $header= "noreply@profit.com";
 
                     if(send_email($Email,$Subject,$Message,$header)){
-                        echo '<div class="alert alert success"> Please Check Your Email. </div>';
+                        echo '<div class="alert alert-success"> Please check your email. </div>';
 
                     }else{
                         echo Error_validation("We Coudn't Send An Email.");
@@ -284,7 +298,7 @@
             }
 
         }else{
-            set_message('<div class="alert alert-danger"> Your Code Has Been Expired. :) </div>');
+            set_message('<div class="alert alert-danger"> Your code has been expired. :) </div>');
             redirect('recover.php');
         }
     }
@@ -303,31 +317,31 @@
                             $result = Query($query);
 
                             if($result){
-                                set_message('<div class="alert alert-success"> Your Password Has Been Activated. </div>');
+                                set_message('<div class="alert alert-success"> Your password has been activated. </div>');
                                 redirect("login.php");
 
                             }else{
-                                set_message('<div class="alert alert-danger">Something Went Wrong .</div>');
+                                set_message('<div class="alert alert-danger">Something went wrong .</div>');
                             }
 
                         }else{
-                            set_message('<div class="alert alert-danger"> Passwords Do Not Match . </div>');
+                            set_message('<div class="alert alert-danger"> Passwords do not match . </div>');
 
                         }
                     }else{
-                        set_message('<div class="alert alert-danger"> Your Code or Email Has Not Matched. </div>');
+                        set_message('<div class="alert alert-danger"> Your code or email has not matched. </div>');
 
                     }
 
                 }
 
             }else{
-                set_message('<div class="alert alert-danger"> Your Code or Email Has Not Matched. </div>');
+                set_message('<div class="alert alert-danger">  Your code or email has not matched.</div>');
 
             }
 
         }else{
-            set_message('<div class="alert alert-danger"> Your Period Time Has Been Expired. </div>');
+            set_message('<div class="alert alert-danger"> Your period time has been expired. </div>');
         }
 
     }
@@ -341,10 +355,10 @@
             $Remember= isset($_POST['remember']);
 
             if(empty($UserEmail)){
-                $Errors[]="Please Enter Your Email.";
+                $Errors[]="Please enter your email.";
             }
             if(empty($UserPass)){
-                $Errors[]="Please Enter Your Password.";
+                $Errors[]="Please enter your password.";
             }
             if(!empty($Errors)){
                 foreach($Errors as $Error){
@@ -352,10 +366,10 @@
                 }
             }else{
                 if(user_login($UserEmail,$UserPass,$Remember)){
+                    if(user_login($UserEmail,$UserPass,$Remember)){
                     redirect('../single-item.html');
                 }else{
-                    echo Error_validation("Please Enter The Correct Email or Password.");
-
+                     echo Error_validation("Please enter the correct email or password. /Your account is not verified yet.");
                 }
             }
         }
