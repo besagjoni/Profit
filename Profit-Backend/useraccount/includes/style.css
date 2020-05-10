@@ -1,0 +1,19 @@
+.photo:before{
+	background-image: url('../../img/pic4.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+	content: "";
+	position: fixed;
+	top: 0px;
+	bottom: 0px;
+	left: 0px;
+	right: 0px;
+	z-index: -1;
+	display: block;
+	filter: blur(2px);
+}
+
+body{
+	background: rgb(83,83,83);
+	background: linear-gradient(90deg, rgba(83,83,83,1) 0%, rgba(255,26,26,0) 100%);
+}
