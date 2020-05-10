@@ -66,20 +66,20 @@
             //Check The First Name Characters
 
             if(strlen($FirstName)<$Min){
-                $Errors[]="First Name Cannot Be Less than ($Min) Characters.";
+                $Errors[]="First Name cannot be less than ($Min) characters.";
             }
 
 
             //Check If The Email Exists
 
             if(Email_Exists($Email)){
-                $Errors[]="Email Alerady Registered.";
+                $Errors[]="Email already registered.";
             }
 
             //Password & Confirm Password
 
             if($Pass!=$CPass){
-                $Errors[]="Passwords Don't Match.";
+                $Errors[]="Passwords don't match.";
             }
 
             if(!empty($Errors)){
