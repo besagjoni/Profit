@@ -7,7 +7,7 @@
            <div class="col-lg-6 m-auto">
                <div class="card bg-light mt-5 py-2">
                     <div class="card-title">
-                        <h2 class="text-center mt-2"> Enter Code </h2>
+                        <h2 class="text-center mt-2"> Enter New Password </h2>
 						<hr>
                         <?php reset_password(); 
                         display_message(); ?>
