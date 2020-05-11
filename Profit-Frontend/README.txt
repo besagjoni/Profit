@@ -1,0 +1,1 @@
+Te gjitha fotot e artikujve te jene me permasa :180 x 220
