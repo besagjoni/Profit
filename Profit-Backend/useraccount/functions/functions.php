@@ -202,6 +202,7 @@
                 if($Remember == true){
                     setcookie('email', $UEmail, time()+86400);
                 }
+                redirect('../index.php');
                 $_SESSION['Email']=$UEmail;
                 return true;
             }else{
@@ -217,7 +218,7 @@
                     if($Remember == true){
                         setcookie('email', $UEmail, time()+86400);
                     }
-                    redirect('../Admin/admin.php');
+                    redirect('../Admin/category/index.php');
                     $_SESSION['Email']=$UEmail;
                     return true;
                 }else{
