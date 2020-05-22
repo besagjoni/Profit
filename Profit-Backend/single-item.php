@@ -11,7 +11,8 @@ $mysqli = new mysqli($host, $user, $pass, $db);
 $ID= $_GET['ID'];
 $result = $mysqli->query ("SELECT * FROM program WHERE ID=$ID") or die($mysqli->error);
 $result2 = $mysqli->query ("SELECT * FROM programcategory WHERE ID=$ID") or die($mysqli->error);
-
+$res = $mysqli->query ("SELECT * FROM nutrition WHERE ID=$ID") or die($mysqli->error);
+$res2 = $mysqli->query ("SELECT * FROM nutritioncategory WHERE ID=$ID") or die($mysqli->error);
 ?>
 
 <!DOCTYPE html>
@@ -107,6 +108,33 @@ $result2 = $mysqli->query ("SELECT * FROM programcategory WHERE ID=$ID") or die(
                             <div class="card-body item-category">
                                 <a class="card-text font-italic">Category:</a> 
                                 <p class="card-text" id="category"><?= $item['ProgramCategory'] ?></p>
+                            </div>
+                            <div class="card-body item-action">
+                                <button type="button" class="btn btn-outline-warning save-btn">Save</button>
+                            </div>
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <h5 class="item-title"><?= $item['Title'] ?></h5>
+                            </div>
+                            <div class="card-body" >
+                                <p class="card-text">
+                                <?= $item['Description'] ?>
+                                </p>
+                            </div>
+
+                        </div>
+
+                    </div>
+                <?php endif; ?>
+                    <?php if ($item = $res->fetch_assoc()):?>
+                    <div class=" row no-gutters" style="width:1000px">
+                        <div class="padding:20 px my-5 col-md-4" style="left:10px">
+                            <?php echo '<img src="data:img/jpg;base64,'.base64_encode($item['img']).'" height="200" width="200"  class="card-img" alt="..." >' ?>
+                            <!--<img src="img/prog1.jpg" class="my-5 card-img item-img" alt="..."> -->
+                            <div class="card-body item-category">
+                                <a class="card-text font-italic">Category:</a> 
+                                <p class="card-text" id="category"><?= $item['NutritionCategory'] ?></p>
                             </div>
                             <div class="card-body item-action">
                                 <button type="button" class="btn btn-outline-warning save-btn">Save</button>
