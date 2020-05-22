@@ -198,7 +198,7 @@
                         <div class="card-desc">                        
                             <h3><?= $program['Title'] ?></h3>
                             <p><?= $program['Description'] ?></p>
-                            <a href="programs.php" class="btn-card">Read</a>                              
+                            <a href="useraccount/redirect.php?ID=<?php echo $program['ID']; ?>" class="btn-card">Read</a>                              
                         </div>                                          
                     </div>                    
                 </div>
