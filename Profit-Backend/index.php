@@ -228,7 +228,7 @@
                         <div class="card-desc">                        
                             <h3><?= $nutrition['Title'] ?></h3>
                             <p><?= $nutrition['Description'] ?></p>
-                            <a href="useraccount/redirect.php?ID=<?php echo $nutrition['ID']; ?> class="btn-card">Read</a>                              
+                            <a href="useraccount/redirect.php?ID=<?php echo $nutrition['ID']; ?>" class="btn-card">Read</a>                              
                         </div>                                          
                     </div>                    
                 </div>
