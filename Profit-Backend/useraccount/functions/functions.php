@@ -368,7 +368,7 @@
             }else{
                 if(user_login($UserEmail,$UserPass,$Remember)){
                     if(user_login($UserEmail,$UserPass,$Remember)){
-                    redirect('../single-item.html');
+                    redirect(" ../single-item.php?ID=".$_GET['ID']);
                 }else{
                      echo Error_validation("Please enter the correct email or password. /Your account is not verified yet.");
                 }
