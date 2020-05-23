@@ -115,7 +115,7 @@ $NutritionCategory='';
                                 </div>
                                 <div class="card-body program-action">
                                     <a href="useraccount/redirect.php?ID=<?php echo $nutrition['ID']; ?>" class="card-link full-item" >See full article</a>
-                                    <button type="button" class="btn btn-outline-warning save-btn"name="save"><a href="saved-items.php?id=<?php echo $nutrition['ID']; ?>" >Save</a></button>
+                                    <button type="button" class="btn btn-outline-warning save-btn"name="save"><a href="saved-items.php" >Save</a></button>
                                 </div>
                             </div>
 
