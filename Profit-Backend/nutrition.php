@@ -29,6 +29,11 @@ $mysqli = new mysqli($host, $user, $pass, $db);
 $result = $mysqli->query ("SELECT * FROM nutrition ORDER BY Title DESC LIMIT 5") or die($mysqli->error);
 $result2 = $mysqli->query ("SELECT * FROM nutritioncategory ORDER BY Name ASC") or die($mysqli->error);
 
+$ID= $_GET['ID'];
+$Title='';
+$Description='';
+$NutritionCategory='';
+
 ?>
 
     <!--Start Home Section-->
@@ -109,8 +114,8 @@ $result2 = $mysqli->query ("SELECT * FROM nutritioncategory ORDER BY Name ASC") 
                                     <?= $nutrition['NutritionCategory'] ?>
                                 </div>
                                 <div class="card-body program-action">
-                                    <a href="useraccount/redirect.php" class="card-link full-item">See full article</a>
-                                    <button type="button" class="btn btn-outline-warning save-btn">Save</button>
+                                    <a href="useraccount/redirect.php?ID=<?php echo $nutrition['ID']; ?>" class="card-link full-item" >See full article</a>
+                                    <button type="button" class="btn btn-outline-warning save-btn"name="save"><a href="saved-items.php?id=<?php echo $nutrition['ID']; ?>" >Save</a></button>
                                 </div>
                             </div>
 
