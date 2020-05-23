@@ -111,7 +111,7 @@
                                 </div>
                                 <div class="card-body program-action">
                                     <a href="useraccount/redirect.php?ID=<?php echo $program['ID']; ?>" class="card-link full-item" >See full article</a>
-                                    <button type="button" class="btn btn-outline-warning save-btn"><a href="saved-items.php?id=<?php echo $program['ID']; ?>" ></td>Save</a></button>
+                                    <button type="button" class="btn btn-outline-warning save-btn"><a href="saved-items.php?id=<?php echo $program['ID']; ?>" >Save</a></button>
                                 </div>
                             </div>
                         </div>
