@@ -28,7 +28,12 @@
 
     $result = $mysqli->query ("SELECT * FROM program ORDER BY Title DESC LIMIT 5") or die($mysqli->error);
     $result2 = $mysqli->query ("SELECT * FROM programcategory ORDER BY Name ASC") or die($mysqli->error);
-
+    
+    $ID= $_GET['ID'];
+    $Title='';
+    $Description='';
+    $ProgramCategory='';
+    
     ?>
     <!--Start Home Section-->
     <div id="home">
@@ -105,8 +110,8 @@
                                     <?= $program['ProgramCategory'] ?>
                                 </div>
                                 <div class="card-body program-action">
-                                    <a href="useraccount/redirect.php" class="card-link full-item" >See full article</a>
-                                    <button type="button" class="btn btn-outline-warning save-btn">Save</button>
+                                    <a href="useraccount/redirect.php?ID=<?php echo $program['ID']; ?>" class="card-link full-item" >See full article</a>
+                                    <button type="button" class="btn btn-outline-warning save-btn"><a href="saved-items.php?id=<?php echo $program['ID']; ?>" ></td>Save</a></button>
                                 </div>
                             </div>
                         </div>
