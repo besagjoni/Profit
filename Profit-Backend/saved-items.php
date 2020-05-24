@@ -68,9 +68,9 @@ WHERE savednutrition.UserID=$id_perdoruesi LIMIT 2") or die($mysqli->error);
                     </li>
                 </ul>
                 <div class="search">
-                    <form action="#">
+                    <form action="search.php" method="POST">
                         <input type="text" placeholder=" Search... " name="search">
-                        <button>
+                        <button name="submit-search">
                             <i class="fa fa-search" style="font-size: 18px;">
                             </i>
                         </button>
