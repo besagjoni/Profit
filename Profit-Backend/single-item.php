@@ -65,13 +65,13 @@ $res2 = $mysqli->query ("SELECT * FROM nutritioncategory WHERE ID=$ID") or die($
                     </li>
                 </ul>
                 <div class="search">
-                    <form action="#">
+                    <form action="search.php" method="POST">
                         <input type="text" placeholder=" Search... " name="search">
-                        <button>
+                        <button name="submit-search">
                             <i class="fa fa-search" style="font-size: 18px;">
                             </i>
                         </button>
-                    </form>
+                    </form>>
                 </div>
                 <div class="settings"><i class="fa fa-cog"></i>
                     <div class="dropdown-settings">
