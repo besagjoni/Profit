@@ -1,5 +1,5 @@
-
 <?php include 'useraccount/functions/db.php'; ?>
+<?php include 'useraccount/functions/functions.php'; ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -49,48 +49,48 @@
                         <a class="nav-link" href="useraccount/register.php">Register</a>
                     </li>
                 </ul>
+                <div class="search">
+                    <form action="search.php" method="POST">
+                        <input type="text" placeholder=" Search... " name="search">
+                        <button name="submit-search">
+                            <i class="fa fa-search" style="font-size: 18px;" >
+                            </i>
+                        </button>
+                    </form>
+                </div>
             </div>
         </nav>
         <br>
         <br>
         <br>
         <br>
-<div class="article-container">
+        <div class="article-container">
     <?php
         if(isset($_POST['submit-search'])){
-            $search = mysqli_real_escape_string($con, $_POST['search']);
-            $sql="SELECT * FROM nutrition Where  Title LIKE '%$search%' OR Description LIKE '%$search%' ";
+            $search = escape($_POST['search']);
+            
+            $sql="SELECT * FROM nutrition Where  Title LIKE '%$search%' OR NutritionCategory LIKE '%$search%' UNION SELECT * FROM program Where  Title LIKE '%$search%' OR ProgramCategory LIKE '%$search%' ";
             $result= Query($sql);
-            $queryResult= mysqli_num_rows($result);
-
-            if($queryResult>0){
-                while($row = mysqli_fetch_assoc($result)){
-                    echo "<a href='single-item.php?Title=".$row['Title']."'><div class='article-box'> 
-                    <h3> ".$row['Title']."</h3> </a>
-                    <p> ".$row['Description']."</p>
-                    </div>";
+            $queryResult= row_count($result);
+            if(empty($search)){
+                echo "Please enter some text.";
+            }
+            else if($queryResult>0){
+                while($row = fatech_data($result)){
+                echo "<div class='article-box'> 
+                <img src= data:img/jpg;base64,".base64_encode($row['img'])." width='100' height='100' alt='...' > <a href='useraccount/redirect.php?ID=".$row['ID']."'> 
+                    ".$row['Title']." </a>
+                    </div>  <br>";
                 }
 			}else{
-                $search = mysqli_real_escape_string($con, $_POST['search']);
-                $sql="SELECT * FROM program Where  Title LIKE '%$search%' OR Description LIKE '%$search%' ";
-                $result= Query($sql);
-                $queryResult= mysqli_num_rows($result);
-    
-                if($queryResult>0){
-                    while($row = mysqli_fetch_assoc($result)){
-                        echo "<a href='single-item.php?Title=".$row['Title']."'><div class='article-box'> 
-                        <h3> ".$row['Title']."</h3> </a>
-                        <p> ".$row['Description']."</p>
-                        </div>";
-                    }
-                }
+                echo "<div class='search-error'> There are no results matching your search.</div>";
             }
-        }else{
-                echo "There are no results matching your search.";
-            }  
+        }
+            
     ?>
 </div>
-
+<br>
+<br>
 <div id="footer" class="offset">
 
         <footer>
