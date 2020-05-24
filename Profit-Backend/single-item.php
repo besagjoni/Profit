@@ -104,13 +104,12 @@ $res2 = $mysqli->query ("SELECT * FROM nutritioncategory WHERE ID=$ID") or die($
                     <div class=" row no-gutters" style="width:1000px">
                         <div class="padding:20 px my-5 col-md-4" style="left:10px">
                             <?php echo '<img src="data:img/jpg;base64,'.base64_encode($item['img']).'" height="200" width="200"  class="card-img" alt="..." >' ?>
-                            <!--<img src="img/prog1.jpg" class="my-5 card-img item-img" alt="..."> -->
                             <div class="card-body item-category">
                                 <a class="card-text font-italic">Category:</a> 
                                 <p class="card-text" id="category"><?= $item['ProgramCategory'] ?></p>
                             </div>
                             <div class="card-body item-action">
-                                <button type="button" class="btn btn-outline-warning save-btn">Save</button>
+                            <button type="button" class="btn btn-outline-warning save-btn savePost" value="<?php echo $item['ID']; ?>"><a href= "saved-items.php?ID=<?php echo $item['ID']; ?>">Save</a></button>
                             </div>
                         </div>
                         <div class="col-md-8">
@@ -126,12 +125,11 @@ $res2 = $mysqli->query ("SELECT * FROM nutritioncategory WHERE ID=$ID") or die($
                         </div>
 
                     </div>
-                <?php endif; ?>
+                    <?php endif; ?>
                     <?php if ($item = $res->fetch_assoc()):?>
                     <div class=" row no-gutters" style="width:1000px">
                         <div class="padding:20 px my-5 col-md-4" style="left:10px">
                             <?php echo '<img src="data:img/jpg;base64,'.base64_encode($item['img']).'" height="200" width="200"  class="card-img" alt="..." >' ?>
-                            <!--<img src="img/prog1.jpg" class="my-5 card-img item-img" alt="..."> -->
                             <div class="card-body item-category">
                                 <a class="card-text font-italic">Category:</a> 
                                 <p class="card-text" id="category"><?= $item['NutritionCategory'] ?></p>
@@ -193,7 +191,24 @@ $res2 = $mysqli->query ("SELECT * FROM nutritioncategory WHERE ID=$ID") or die($
     <script src="bootstrap-4.1.3-dist/js/bootstrap.min.js"></script>
     <script src="https://use.fontawesome.com/releases/v5.5.0/js/all.js"></script>
     <!--- End of Script Source Files -->
+    
+    <script>
+    $(document).ready(function(){
+        $('.savePost').on('click', function(){
+        var statusVal = $(this).val();
+        console.log(statusVal);
+            $.ajax({
+                type: "POST",
+                url: "saveStatus.php",
+                data: {statusType: statusVal},
+                success: function(msg){
+                    console.log(msg);
+                }
+            })
+        });
+    });
 
+    </script>
 
 </body>
 
