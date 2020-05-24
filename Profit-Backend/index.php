@@ -197,7 +197,7 @@
                         </div>
                         <div class="card-desc">                        
                             <h3><?= $program['Title'] ?></h3>
-                            <p><?= $program['Description'] ?></p>
+                            <br>
                             <a href="useraccount/redirect.php?ID=<?php echo $program['ID']; ?>" class="btn-card">Read</a>                              
                         </div>                                          
                     </div>                    
@@ -227,7 +227,7 @@
                         </div>
                         <div class="card-desc">                        
                             <h3><?= $nutrition['Title'] ?></h3>
-                            <p><?= $nutrition['Description'] ?></p>
+                            <br>
                             <a href="useraccount/redirect.php?ID=<?php echo $nutrition['ID']; ?>" class="btn-card">Read</a>                              
                         </div>                                          
                     </div>                    
