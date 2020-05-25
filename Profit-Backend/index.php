@@ -214,6 +214,17 @@
 
     <section class="details-card2">
         <div class="container">
+            
+             <div class="row">
+                <div class="col-xs-12">
+                    <div class="section-title2 text-center">
+                        <h2><b>Dietat me te fundit!</b></h2>
+                        <div class="sub-heading2">
+                            Lexoni artikujt mbi dietat me te mira<br>Gjeni dieten qe ju pershtatet!
+                        </div>
+                    </div>
+                </div>
+            </div> <br><br>
 
             <div class="row">
             <?php while ($nutrition = $res->fetch_assoc()): ?>
@@ -254,7 +265,7 @@
 
                 <!--Grid column-->
                 <div class="col-md-9 mb-md-0 mb-5">
-                    <form id="contact-form" name="contact-form" action="mail.php" method="POST">
+                    <form id="contact-form" name="contact-form" action="email.php" method="POST">
 
                         <!--Grid row-->
                         <div class="row">
@@ -329,7 +340,7 @@
                         </li>
 
                         <li><i class="fas fa-envelope mt-4 fa-2x"></i>
-                            <p>contact@profit.com</p>
+                            <p>info.profit2020@gmail.com</p>
                         </li>
                     </ul>
                 </div>
