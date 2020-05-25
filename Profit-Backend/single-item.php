@@ -135,7 +135,7 @@ $res2 = $mysqli->query ("SELECT * FROM nutritioncategory WHERE ID=$ID") or die($
                                 <p class="card-text" id="category"><?= $item['NutritionCategory'] ?></p>
                             </div>
                             <div class="card-body item-action">
-                                <button type="button" class="btn btn-outline-warning save-btn">Save</button>
+                                <button type="button" class="btn btn-outline-warning save-btn savePost" value="<?php echo $item['ID']; ?>"><a href= "saved-items.php?ID=<?php echo $item['ID']; ?>">Save</a></button>
                             </div>
                         </div>
                         <div class="col-md-8">
