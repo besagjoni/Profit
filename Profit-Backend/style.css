@@ -301,6 +301,8 @@ iframe {
 .section-title {
     width: 100%;
     padding-top: .1rem;
+    text-align: center;
+    padding-left: 80px;
 }
 
 .section-title h2 {
@@ -437,11 +439,14 @@ a.btn-card {
 .section-title2 {
     width: 100%;
     padding-top: .1rem;
+    text-align: center;
+    padding-left: 190px;
 }
 
 .section-title2 h2 {
-    padding-left: 200px;
+    padding-left: 190px;
     color: #ffffff;
+    text-align: center;
 }
 
 .sub-heading2 {
