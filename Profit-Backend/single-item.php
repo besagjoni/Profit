@@ -97,9 +97,9 @@ $res2 = $mysqli->query ("SELECT * FROM nutritioncategory WHERE ID=$ID") or die($
         <div class="go-back">
             <button class="go-back-btn" ><a href="programs.php"><i class="fa fa-arrow-left"></i> Go back</a></button>
         </div>
-        <div class="content row" id="single-item" style="width: 1200px">
+        <div class="content row" id="single-item" style="width: 1500px">
             <div class="single-item">
-                <div class="card mb-3 width: 50px program-card" style="max-width: 940px;">
+                <div class="card mb-3 width: 50px program-card" style="max-width: 1000px;">
                 <?php if ($item = $result->fetch_assoc()):?>
                     <div class=" row no-gutters" style="width:1000px">
                         <div class="padding:20 px my-5 col-md-4" style="left:10px">
