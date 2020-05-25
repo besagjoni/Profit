@@ -1,3 +1,4 @@
+<?php require_once('useraccount/functions/db.php'); ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -16,8 +17,7 @@
 </head>
 
 <body data-spy="scroll" data-target="#navbarResponsive">
-    <?php
-
+<?php
     //database connection
     $host = 'localhost';
     $user = 'root';
@@ -25,10 +25,16 @@
     $db = 'profitphpmyadmin';
 
     $mysqli = new mysqli($host, $user, $pass, $db);
+    if(isset($_GET['page'])){
+        $page=$_GET['page'];
+    }else{
+        $page=1;
+    }
+    $num_per_page=05;
+    $start_from=($page-1)*05;
 
-    $result = $mysqli->query ("SELECT * FROM nutrition ORDER BY Title DESC LIMIT 5") or die($mysqli->error);
+    $result = $mysqli->query ("SELECT * FROM nutrition LIMIT $start_from, $num_per_page") or die($mysqli->error);
     $result2 = $mysqli->query ("SELECT * FROM nutritioncategory ORDER BY Name ASC") or die($mysqli->error);
-
     $ID= $_GET['ID'];
     $Title='';
     $Description='';
@@ -68,9 +74,9 @@
                     </li>
                 </ul>
                 <div class="search">
-                    <form action="search.php" method="POST">
+                    <form action="#">
                         <input type="text" placeholder=" Search... " name="search">
-                        <button name="submit-search">
+                        <button>
                             <i class="fa fa-search" style="font-size: 18px;">
                             </i>
                         </button>
@@ -110,13 +116,14 @@
                                 <div class="card-body">
                                     <h5 class="card-title"><?= $nutrition['Title'] ?></h5>
                                 </div>
-                              <div class="card-body">
+                                <div class="card-body">
                                     <a class="card-text font-italic">Category:</a>
+                                    
                                     <?= $nutrition['NutritionCategory'] ?>
                                 </div>
                                 <div class="card-body program-action">
                                     <a href="useraccount/redirect.php?ID=<?php echo $nutrition['ID']; ?>" class="card-link full-item" >See full article</a>
-                                    <button type="button" class="btn btn-outline-warning save-btn savePost" value="<?php echo $nutrition['ID']; ?>"><a href= "useraccount/redirectsaved.php?ID=<?php echo $nutrition['ID']; ?>">Save</a></button>
+                                    <button type="button" class="btn btn-outline-warning save-btn" name="save"><a href="saved-items.php" >Save</a></button>
                                 </div>
                             </div>
 
@@ -125,17 +132,32 @@
                 </div>
                 <?php endwhile; ?>
             </div>
+            <?php
+                $pr_query="SELECT * FROM nutrition";
+                $pr_result= Query($pr_query);
+                $total_record=row_count($pr_result);
+
+                $total_page = ceil( $total_record/$num_per_page);
+                
+            ?>
             <nav aria-label="Page navigation example">
                 <ul class="pagination justify-content-center">
-                    <li class="page-item disabled">
-                        <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
+                    <?php if($page>1){
+                        echo "<li class='page-item disabled'>
+                        <a href='nutrition.php?page=".($page-1)."'class='btn btn-danger'> Previous </a> </li>";
+                    }
+                    for($i=1; $i<$total_page; $i++){
+                    echo" <nav aria-label='Page navigation example'>
+                  
+                    <li class='page-item'>    
+                    <a class='page-link' href='nutrition.php?page=".$i."'>$i </a>
                     </li>
-                    <li class="page-item"><a class="page-link" href="#">1</a></li>
-                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                    <li class="page-item">
-                        <a class="page-link" href="#">Next</a>
-                    </li>
+                    </nav>";
+                }
+                    if($i>$page){
+                        echo "<li class='page-item disabled'>
+                        <a href='nutrition.php?page=".($page+1)."'class='btn btn-danger'> Next </a> </li>";
+                    } ?>
                 </ul>
             </nav>
         </div>
@@ -189,26 +211,7 @@
     <script src="https://use.fontawesome.com/releases/v5.5.0/js/all.js"></script>
     <!--- End of Script Source Files -->
 
-    <script>
-    $(document).ready(function(){
-        $('.savePost').on('click', function(){
-        var statusVal = $(this).val();
-        console.log(statusVal);
-            $.ajax({
-                type: "POST",
-                url: "saveStatus.php",
-                data: {statusType: statusVal},
-                success: function(msg){
-                    console.log(msg);
-                }
-            })
-        });
-    });
-
-    </script>
 
 </body>
 
 </html>
-
-

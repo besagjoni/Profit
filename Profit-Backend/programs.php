@@ -1,3 +1,4 @@
+<?php require_once('useraccount/functions/db.php'); ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -25,8 +26,15 @@
     $db = 'profitphpmyadmin';
 
     $mysqli = new mysqli($host, $user, $pass, $db);
+    if(isset($_GET['page'])){
+        $page=$_GET['page'];
+    }else{
+        $page=1;
+    }
+    $num_per_page=05;
+    $start_from=($page-1)*05;
 
-    $result = $mysqli->query ("SELECT * FROM program ORDER BY Title DESC LIMIT 5") or die($mysqli->error);
+    $result = $mysqli->query ("SELECT * FROM program LIMIT $start_from, $num_per_page") or die($mysqli->error);
     $result2 = $mysqli->query ("SELECT * FROM programcategory ORDER BY Name ASC") or die($mysqli->error);
     
     $ID= $_GET['ID'];
@@ -69,7 +77,7 @@
                     <form action="search.php" method="POST">
                         <input type="text" placeholder=" Search... " name="search">
                         <button name="submit-search">
-                            <i class="fa fa-search" style="font-size: 18px;">
+                            <i class="fa fa-search" style="font-size: 18px;" >
                             </i>
                         </button>
                     </form>
@@ -92,6 +100,7 @@
             <div class="row programs-title">
                 <h3>Programs</h3>
             </div>
+            <!--'<-?=$program['img'] ?>'-->
             <div class="row programs-container">
                 <?php while ($program = $result->fetch_assoc()): ?> 
                 <div class="row programs-content">
@@ -110,7 +119,7 @@
                                 </div>
                                 <div class="card-body program-action">
                                     <a href="useraccount/redirect.php?ID=<?php echo $program['ID']; ?>" class="card-link full-item" >See full article</a>
-                                    <button type="button" class="btn btn-outline-warning save-btn savePost" value="<?php echo $program['ID']; ?>"><a href= "useraccount/redirectsaved.php?ID=<?php echo $program['ID']; ?>">Save</a></button>
+                                    <button type="button" name="save" class="btn btn-outline-warning save-btn"><a href="saved-items.php" >Save</a></button>
                                 </div>
                             </div>
                         </div>
@@ -118,18 +127,32 @@
                 </div>
                 <?php endwhile; ?>
             </div>
+            <?php
+                $pr_query="SELECT * FROM program";
+                $pr_result= Query($pr_query);
+                $total_record=row_count($pr_result);
+
+                $total_page = ceil( $total_record/$num_per_page);
+                
+            ?>
     
             <nav aria-label="Page navigation example">
                 <ul class="pagination justify-content-center">
-                    <li class="page-item disabled">
-                        <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
-                    </li>
-                    <li class="page-item"><a class="page-link" href="#">1</a></li>
-                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                    <li class="page-item">
-                        <a class="page-link" href="#">Next</a>
-                    </li>
+                    <?php if($page>1){
+                        echo "<li class='page-item disabled'>
+                        <a href='programs.php?page=".($page-1)."'class='btn btn-danger'> Previous </a> </li>";
+                    }
+                    for($i=1; $i<$total_page; $i++){
+                        echo" <nav aria-label='Page navigation example'>
+                        <li class='page-item'>    
+                        <a class='page-link' href='programs.php?page=".$i."'>$i </a>
+                        </li>
+                        </nav>";
+                    }
+                    if($i>$page){
+                        echo "<li class='page-item disabled'>
+                        <a href='programs.php?page=".($page+1)."'class='btn btn-danger'> Next </a> </li>";
+                    } ?>
                 </ul>
             </nav>
         </div>
@@ -184,25 +207,6 @@
     <script src="bootstrap-4.1.3-dist/js/bootstrap.min.js"></script>
     <script src="https://use.fontawesome.com/releases/v5.5.0/js/all.js"></script>
     <!--- End of Script Source Files -->
-
-    <script>
-    $(document).ready(function(){
-        $('.savePost').on('click', function(){
-        var statusVal = $(this).val();
-        console.log(statusVal);
-            $.ajax({
-                type: "POST",
-                url: "saveStatus.php",
-                data: {statusType: statusVal},
-                success: function(msg){
-                    console.log(msg);
-                }
-            })
-        });
-    });
-
-    </script>
-    <!-- fundi i save -->
 
 
 </body>
