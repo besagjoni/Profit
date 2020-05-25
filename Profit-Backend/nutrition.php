@@ -123,7 +123,7 @@
                                 </div>
                                 <div class="card-body program-action">
                                     <a href="useraccount/redirect.php?ID=<?php echo $nutrition['ID']; ?>" class="card-link full-item" >See full article</a>
-                                    <button type="button" class="btn btn-outline-warning save-btn" name="save"><a href="saved-items.php" >Save</a></button>
+                                    <button type="button" class="btn btn-outline-warning save-btn savePost" value="<?php echo $nutrition['ID']; ?>"><a href= "useraccount/redirectsaved.php?ID=<?php echo $nutrition['ID']; ?>">Save</a></button>
                                 </div>
                             </div>
 
@@ -210,7 +210,25 @@
     <script src="bootstrap-4.1.3-dist/js/bootstrap.min.js"></script>
     <script src="https://use.fontawesome.com/releases/v5.5.0/js/all.js"></script>
     <!--- End of Script Source Files -->
+    
+        <script>
+    $(document).ready(function(){
+        $('.savePost').on('click', function(){
+        var statusVal = $(this).val();
+        console.log(statusVal);
+            $.ajax({
+                type: "POST",
+                url: "saveStatus.php",
+                data: {statusType: statusVal},
+                success: function(msg){
+                    console.log(msg);
+                }
+            })
+        });
+    });
 
+    </script>
+    <!-- fundi i save -->
 
 </body>
 
