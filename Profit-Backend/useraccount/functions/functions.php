@@ -377,4 +377,36 @@
     }
     }
 
+    function redirect_validation_saved(){
+        $Errors=[];
+        if($_SERVER['REQUEST_METHOD']=='POST'){
+            $UserEmail= clean($_POST['UEmail']);
+            $UserPass= clean($_POST['UPass']);
+            $Remember= isset($_POST['remember']);
+
+            if(empty($UserEmail)){
+                $Errors[]="Please enter your email.";
+            }
+            if(empty($UserPass)){
+                $Errors[]="Please enter your password.";
+            }
+            if(!empty($Errors)){
+                foreach($Errors as $Error){
+                    echo  Error_validation($Error);
+                }
+            }else{
+                if(user_login($UserEmail,$UserPass,$Remember)){
+                    if(user_login($UserEmail,$UserPass,$Remember)){
+                        redirect(" ../saved-items.php?ID=".$_GET['ID']);
+                    exit;
+                    }
+                
+                else{
+                     echo Error_validation("Please enter the correct email or password. /Your account is not verified yet.");
+                    }
+                }
+            }
+        }
+    }
+
 ?>
