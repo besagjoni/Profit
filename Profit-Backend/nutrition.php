@@ -33,9 +33,10 @@
     $num_per_page=05;
     $start_from=($page-1)*05;
 
-    $result = $mysqli->query ("SELECT * FROM nutrition LIMIT $start_from, $num_per_page") or die($mysqli->error);
-    $result2 = $mysqli->query ("SELECT * FROM nutritioncategory ORDER BY Name ASC") or die($mysqli->error);
     $ID= $_GET['ID'];
+    $result = $mysqli->query ("SELECT * FROM nutrition LIMIT $start_from, $num_per_page WHERE ID=$ID") or die($mysqli->error);
+    $result2 = $mysqli->query ("SELECT * FROM nutritioncategory ORDER BY Name ASC") or die($mysqli->error);
+
     $Title='';
     $Description='';
     $NutritionCategory='';
