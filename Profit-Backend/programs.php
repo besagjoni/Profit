@@ -163,7 +163,7 @@
             <div class="border-bottom"><?php while ($category = $result2->fetch_assoc()): ?> </div>
                 <div class="row categories-container">
                     <ul class="list-group list-group-flush">
-                        <li class="list-group-item" name="kategori"><a href=""><?= $category['Name'] ?></a></li>
+                        <li class="list-group-item" name="kategori"><a href="kategoriP.php?name_category=<?php echo $category['Name']; ?>"><?= $category['Name'] ?></a></li>
                     </ul> 
                     <?php endwhile; ?>       
                 </div>    
