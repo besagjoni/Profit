@@ -74,10 +74,10 @@
                     </li>
                 </ul>
                 <div class="search">
-                    <form action="#">
+                    <form action="search.php" method="POST">
                         <input type="text" placeholder=" Search... " name="search">
-                        <button>
-                            <i class="fa fa-search" style="font-size: 18px;">
+                        <button name="submit-search">
+                            <i class="fa fa-search" style="font-size: 18px;" >
                             </i>
                         </button>
                     </form>
@@ -107,7 +107,7 @@
             <div class="row programs-container">
                 <?php while ($nutrition = $result->fetch_assoc()): ?> 
                 <div class="row programs-content">
-                    <div class="card mb-3 program-card" style="max-width: 540px;">
+                    <div class="card mb-3 program-card" style="width: 700px;">
                         <div class="row no-gutters">
                             <div class="col-md-4">
                             <?php echo '<img src="data:img/jpg;base64,'.base64_encode($nutrition['img']).'" height="200" width="200"  class="card-img" alt="..." >' ?>
@@ -168,7 +168,7 @@
             <div class="border-bottom"><?php while ($category = $result2->fetch_assoc()): ?></div>
             <div class="row categories-container">
                 <ul class="list-group list-group-flush">
-                    <li class="list-group-item"><a href=""><?= $category['Name'] ?></a></li>
+                    <li class="list-group-item"><a href="kategoriN.php?name_category=<?php echo $category['Name']; ?>"><?= $category['Name'] ?></a></li>
                 </ul>
             <?php endwhile; ?>
             </div>
