@@ -179,7 +179,7 @@
                     <div class="section-title text-center">
                         <h2><b>Programet me te fundit</b></h2>
                         <div class="sub-heading">
-                            Ketu kemi programet e publikuara me te fundit<br>Gjeni programin qe pelqeni me shume!
+                            Ketu kemi programet e publikuara me te fundit. Gjeni programin qe pelqeni me shume!
                         </div>
                     </div>
                 </div>
@@ -192,7 +192,7 @@
                         <div class="card-img">                                             
                             <?php echo '<img src="data:img/jpg;base64,'.base64_encode($program['img']).'" >' ?>
                             <span>
-                            <h4><?= $program['ProgramCategory'] ?></h4> 
+                            <h4 style="width:150px; margin-left:120px"><?= $program['ProgramCategory'] ?></h4> 
                             </span>
                         </div>
                         <div class="card-desc">                        
@@ -220,7 +220,7 @@
                     <div class="section-title2 text-center">
                         <h2><b>Dietat me te fundit!</b></h2>
                         <div class="sub-heading2">
-                            Lexoni artikujt mbi dietat me te mira<br>Gjeni dieten qe ju pershtatet!
+                            Lexoni artikujt mbi dietat me te mira. Gjeni dieten qe ju pershtatet!
                         </div>
                     </div>
                 </div>
@@ -233,7 +233,7 @@
                         <div class="card-img">                                             
                             <?php echo '<img src="data:img/jpg;base64,'.base64_encode($nutrition['img']).'" >' ?>
                             <span>
-                                <h4><?= $nutrition['NutritionCategory'] ?></h4>
+                                <h4 style="width:150px; margin-left:120px"><?= $nutrition['NutritionCategory'] ?></h4>
                             </span>
                         </div>
                         <div class="card-desc">                        
